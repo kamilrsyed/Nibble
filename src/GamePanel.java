@@ -51,7 +51,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
             for (int i = 0; i <= bodyParts; i++) {
                 if (i == 0) {
-                    g.setColor(Color.red);
+                    g.setColor(Color.gray);
                     g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                 } else {
                     g.setColor(Color.darkGray);
@@ -127,8 +127,14 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public class SnakeKeyAdapter extends KeyAdapter {
+        private boolean isKeyProcessing = false;
+
         @Override
         public void keyPressed(KeyEvent e) {
+            if (isKeyProcessing) {
+                return;
+            }
+            isKeyProcessing = true;
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT -> {
                     if (direction != 'R') {
@@ -151,6 +157,7 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
                 }
             }
+            isKeyProcessing = false;
         }
     }
 }
