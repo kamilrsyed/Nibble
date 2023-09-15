@@ -10,7 +10,7 @@ public class GamePanel extends JPanel implements ActionListener {
     static final int SCREEN_HEIGHT = 600;
     static final int UNIT_SIZE = 25;
     static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/UNIT_SIZE;
-    static final int DELAY = 50;
+    static final int DELAY = 65;
     final int[] x = new int[GAME_UNITS];
     final int[] y = new int[GAME_UNITS];
     int bodyParts = 6;
@@ -42,19 +42,19 @@ public class GamePanel extends JPanel implements ActionListener {
     }
     public void draw(Graphics g) {
         if (running) {
-            for (int i = 0; i < (SCREEN_WIDTH/UNIT_SIZE); i++) {
-                g.drawLine(0,i*UNIT_SIZE, SCREEN_WIDTH,i*UNIT_SIZE);
-                g.drawLine(i*UNIT_SIZE,0, i*UNIT_SIZE, SCREEN_HEIGHT);
-            }
+//            for (int i = 0; i < (SCREEN_WIDTH/UNIT_SIZE); i++) {
+//                g.drawLine(0,i*UNIT_SIZE, SCREEN_WIDTH,i*UNIT_SIZE);
+//                g.drawLine(i*UNIT_SIZE,0, i*UNIT_SIZE, SCREEN_HEIGHT);
+//            }
             g.setColor(Color.green);
             g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
 
             for (int i = 0; i <= bodyParts; i++) {
                 if (i == 0) {
-                    g.setColor(Color.gray);
+                    g.setColor(Color.blue);
                     g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                 } else {
-                    g.setColor(Color.darkGray);
+                    g.setColor(Color.CYAN);
                     g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                 }
             }
@@ -95,19 +95,23 @@ public class GamePanel extends JPanel implements ActionListener {
         }
         //check if head collides left border
         if (x[0] < 0) {
-            running = false;
+            x[0] = SCREEN_WIDTH;
+//            running = false;
         }
         //check if head collides right border
         if (x[0] > SCREEN_WIDTH) {
-            running = false;
+            x[0] = 0;
+//            running = false;
         }
         //check if head collides bottom border
         if (y[0] > SCREEN_HEIGHT) {
-            running = false;
+            y[0] = 0;
+//            running = false;
         }
         //check if head collides top border
         if (y[0] < 0) {
-            running = false;
+            y[0] = SCREEN_HEIGHT;
+//            running = false;
         }
         if (!running) {
             timer.stop();
